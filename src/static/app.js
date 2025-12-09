@@ -20,11 +20,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Build participants HTML (show list or fallback message)
+        const participants = details.participants || [];
+        let participantsHtml = "";
+        if (participants.length) {
+          participantsHtml =
+            '<ul class="participants-list">' +
+            participants
+              .map((p) => {
+                const initial = (p || "").trim().charAt(0).toUpperCase() || "?";
+                // note: simple rendering of email; escape if needed for production
+                return `<li class="participant-item"><span class="avatar">${initial}</span><span class="participant-email">${p}</span></li>`;
+              })
+              .join("") +
+            "</ul>";
+        } else {
+          participantsHtml = '<p class="no-participants">No participants yet</p>';
+        }
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="participants">
+            <h5>Participants</h5>
+            ${participantsHtml}
+          </div>
         `;
 
         activitiesList.appendChild(activityCard);
