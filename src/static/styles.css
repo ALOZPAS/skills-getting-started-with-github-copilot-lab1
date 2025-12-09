@@ -131,6 +131,28 @@ section h3 {
   white-space: nowrap;
 }
 
+/* Allow email to take remaining space and push delete button to the right */
+.participant-email {
+  flex: 1 1 auto;
+}
+
+/* Delete button next to each participant */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #c62828;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background-color 0.12s ease;
+  flex: 0 0 auto;
+}
+
+.delete-btn:hover {
+  background-color: rgba(198,40,40,0.06);
+}
+
 /* No participants fallback */
 .no-participants {
   font-style: italic;
